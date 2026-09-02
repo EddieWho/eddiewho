@@ -502,6 +502,36 @@ a:focus-visible {
   gap: 48px;
 }
 
+.about-aside {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 56px;
+}
+
+.portrait-frame {
+  width: min(250px, 100%);
+  margin: 0;
+}
+
+.portrait-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.portrait-frame figcaption {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .about-statement {
   max-width: 900px;
   margin: 0;
@@ -523,6 +553,35 @@ a:focus-visible {
   color: var(--muted);
   font-size: 17px;
   line-height: 1.75;
+}
+
+.research-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 0 36px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--line);
+  list-style: none;
+}
+
+.research-list li {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-height: 64px;
+  padding: 0 18px;
+  background: var(--paper-deep);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.research-list span {
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 12px;
+  font-style: italic;
 }
 
 .cta-section {
@@ -1238,6 +1297,18 @@ a:focus-visible {
   .cta-grid,
   .footer-top,
   .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-aside {
+    gap: 38px;
+  }
+
+  .portrait-frame {
+    width: 180px;
+  }
+
+  .research-list {
     grid-template-columns: 1fr;
   }
 

@@ -97,10 +97,27 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
 
   <section class="about-section">
     <div class="shell about-grid">
-      <p class="eyebrow">03 / A brief introduction</p>
+      <div class="about-aside">
+        <p class="eyebrow">03 / A brief introduction</p>
+        <figure class="portrait-frame">
+          <img
+            src={withBase(siteConfig.portrait)}
+            alt="Portrait of Yin Yuan"
+            width="1254"
+            height="1254"
+            loading="lazy"
+          />
+          <figcaption>Yin Yuan / Portrait</figcaption>
+        </figure>
+      </div>
       <div>
         <p class="about-statement">Curious about the structures behind how people <em>decide, coordinate,</em> and play.</p>
         <p class="about-copy">{siteConfig.intro}</p>
+        <ul class="research-list" aria-label="Research interests">
+          {siteConfig.researchAreas.map((area, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span>{area}</li>
+          ))}
+        </ul>
         <a class="text-link" href={withBase('contact/')}>More about my interests <span aria-hidden="true">→</span></a>
       </div>
     </div>

@@ -2,13 +2,15 @@ export const siteConfig = {
   name: 'Yin Yuan',
   descriptor: 'Research · Data · Interactive Systems',
   description:
-    'I explore how technology shapes organizations, markets, and interactive experiences.',
+    'I explore how data and technology shape supply chains, organizations, and interactive experiences.',
   intro:
-    'My work sits between analytical inquiry and interactive design. I am interested in how systems shape decisions—and how thoughtful technology can make complex ideas tangible.',
-  email: 'TODO_EMAIL',
+    'My interests span supply chain and logistics, and interactive media arts. I am drawn to both the operational logic of complex systems and the expressive possibilities of interactive media.',
+  researchAreas: ['Supply Chain & Logistics', 'Interactive Media Arts'],
+  portrait: 'images/yin-yuan-portrait.png',
+  email: 'eddyyin0424@gmail.com',
   github: 'https://github.com/EddieWho',
-  linkedin: 'TODO_LINKEDIN_URL',
-  cv: 'TODO_CV_URL',
+  linkedin: 'https://www.linkedin.com/in/yinyuan/',
+  cv: 'files/Yin-Yuan-CV.docx',
 } as const;
 
 export const isTodoValue = (value: string) => value.startsWith('TODO_');
