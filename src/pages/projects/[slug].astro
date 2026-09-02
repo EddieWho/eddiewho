@@ -1,0 +1,117 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Tags from '@/components/Tags.astro';
+import CallToAction from '@/components/CallToAction.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const { data } = project;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title={`${data.title}${data.subtitle ? ` — ${data.subtitle}` : ''} | Yin Yuan`}
+  description={data.description}
+  socialImage={false}
+>
+  <article class="project-detail">
+    <header class:list={['project-detail-hero', `detail-${data.visualVariant}`]}>
+      <div class="shell">
+        <a class="back-link" href={`${base}projects/`}><span aria-hidden="true">←</span> All projects</a>
+        <div class="detail-title-grid">
+          <div>
+            <p class="eyebrow">Project / {String(data.order).padStart(2, '0')}</p>
+            <h1>{data.title}</h1>
+            {data.subtitle && <p class="detail-subtitle">{data.subtitle}</p>}
+          </div>
+          <p class="detail-description">{data.description}</p>
+        </div>
+        <Tags tags={data.tags} dark />
+        <div class="detail-visual" aria-label="Visual placeholder; project imagery to be added">
+          <span>{data.visualLabel}</span>
+          <span class="detail-visual-center">+</span>
+          <span>IMAGE ARCHIVE / TODO</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell detail-content">
+      <section class="detail-section overview-section">
+        <div class="detail-section-label"><span>01</span><h2>Overview</h2></div>
+        <div class="prose"><Content /></div>
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-section-label"><span>02</span><h2>Core Experience</h2></div>
+        <ol class="experience-list">
+          {data.coreExperience.map((item, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-section-label"><span>03</span><h2>Key Systems</h2></div>
+        <div class="systems-grid">
+          {data.keySystems.map((system, index) => (
+            <article>
+              <span>{String.fromCharCode(65 + index)}</span>
+              <h3>{system.title}</h3>
+              <p>{system.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {(data.development || data.currentProgress) && (
+        <section class="detail-section detail-notes-grid">
+          {data.development && (
+            <div>
+              <div class="detail-section-label compact"><span>04</span><h2>Development</h2></div>
+              <p class="neutral-placeholder">{data.development}</p>
+            </div>
+          )}
+          {data.currentProgress && (
+            <div>
+              <div class="detail-section-label compact"><span>05</span><h2>Current Progress</h2></div>
+              <p class="neutral-placeholder">{data.currentProgress}</p>
+            </div>
+          )}
+        </section>
+      )}
+
+      <section class="detail-section gallery-section">
+        <div class="detail-section-label"><span>06</span><h2>Gallery</h2></div>
+        {data.gallery.length > 0 ? (
+          <div class="gallery-grid">
+            {data.gallery.map((image) => (
+              <figure>
+                <img src={image.src} alt={image.alt} loading="lazy" />
+                {image.caption && <figcaption>{image.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <div class="gallery-placeholder">
+            <span aria-hidden="true">⊕</span>
+            <p>Project imagery will be added here.</p>
+          </div>
+        )}
+      </section>
+    </div>
+  </article>
+  <CallToAction eyebrow="Continue the conversation" />
+</BaseLayout>

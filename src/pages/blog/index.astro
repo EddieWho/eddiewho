@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BlogCard from '@/components/BlogCard.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publicationDate.valueOf() - a.data.publicationDate.valueOf());
+---
+
+<BaseLayout
+  title="Blog — Yin Yuan"
+  description="Writing by Yin Yuan on research, data, technology, and interactive systems."
+>
+  <PageHeading
+    index="01"
+    eyebrow="Blog"
+    title="Notes for thinking in public."
+    intro="Essays, working notes, and observations on how technology shapes organizations, markets, and interactive experiences."
+  />
+  <section class="blog-index shell">
+    {posts.length > 0 ? (
+      <div class="blog-list">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.publicationDate}
+            tags={post.data.tags}
+            readingTime={post.data.readingTime}
+            slug={post.slug}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="blog-empty-state">
+        <div class="empty-symbol" aria-hidden="true">∴</div>
+        <div>
+          <p class="eyebrow">The first note is taking shape</p>
+          <h2>Writing coming soon.</h2>
+          <p>No articles have been published yet. This space is prepared for future essays and shorter field notes.</p>
+        </div>
+      </div>
+    )}
+  </section>
+</BaseLayout>

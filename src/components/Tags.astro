@@ -1,0 +1,12 @@
+---
+interface Props {
+  tags: string[];
+  dark?: boolean;
+}
+
+const { tags, dark = false } = Astro.props;
+---
+
+<ul class:list={['tag-list', { 'tag-list-dark': dark }]} aria-label="Tags">
+  {tags.map((tag) => <li>{tag}</li>)}
+</ul>

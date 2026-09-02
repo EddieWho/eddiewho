@@ -1,16 +1,32 @@
-## Hi there 👋
+# Yin Yuan — Personal Portfolio
 
-<!--
-**EddieWho/eddiewho** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+A static personal portfolio built with Astro and TypeScript. The site includes Home, Blog, Projects, Contact, and shared project-detail pages.
 
-Here are some ideas to get you started:
+## Local development
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+```bash
+npm install
+npm run dev
+```
+
+The development site is served from `/eddiewho/` to match its GitHub Pages base path.
+
+## Production build
+
+```bash
+npm run build
+```
+
+The generated static site is written to `dist/`.
+
+## Content
+
+- Personal links and profile copy: `src/config/site.ts`
+- Projects: `src/content/projects/`
+- Future blog posts: `src/content/blog/`
+
+Blog frontmatter supports `title`, `description`, `publicationDate`, `tags`, `readingTime`, and `draft`. Draft posts are excluded from all generated pages.
+
+## GitHub Pages
+
+The workflow at `.github/workflows/deploy.yml` builds and deploys the site whenever `main` is pushed. In the repository settings, select **GitHub Actions** as the Pages source before the first deployment.

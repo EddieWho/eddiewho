@@ -1,0 +1,32 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Tags from '@/components/Tags.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={`${post.data.title} | Yin Yuan`} description={post.data.description} socialImage={false}>
+  <article class="article-page shell">
+    <header class="article-header">
+      <a class="back-link" href={`${import.meta.env.BASE_URL}blog/`}><span aria-hidden="true">←</span> All writing</a>
+      <time datetime={post.data.publicationDate.toISOString()}>
+        {post.data.publicationDate.toLocaleDateString('en', { month: 'long', day: 'numeric', year: 'numeric' })}
+      </time>
+      <h1>{post.data.title}</h1>
+      <p>{post.data.description}</p>
+      <Tags tags={post.data.tags} />
+    </header>
+    <div class="prose article-prose"><Content /></div>
+  </article>
+</BaseLayout>

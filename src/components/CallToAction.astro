@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+  label?: string;
+  href?: string;
+}
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+const {
+  eyebrow = 'Start a conversation',
+  title = 'Have a question worth exploring?',
+  text = 'I am always interested in thoughtful conversations around research, data, technology, and game development.',
+  label = 'Get in touch',
+  href = 'contact/',
+} = Astro.props;
+---
+
+<section class="cta-section">
+  <div class="shell cta-grid">
+    <p class="eyebrow">{eyebrow}</p>
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <a class="button button-light" href={withBase(href)}>{label} <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>

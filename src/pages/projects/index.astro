@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import CallToAction from '@/components/CallToAction.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Projects — Yin Yuan"
+  description="Selected projects by Yin Yuan across strategy games, interactive systems, and game AI."
+>
+  <PageHeading
+    index="02"
+    eyebrow="Projects"
+    title="Designed systems, playable ideas."
+    intro="Two ongoing explorations of strategy and uncertainty—built through different forms, but united by a focus on meaningful decisions."
+  />
+  <section class="projects-index-section">
+    <div class="shell project-list">
+      {projects.map((project, index) => (
+        <ProjectCard
+          number={`0${index + 1}`}
+          title={project.data.title}
+          subtitle={project.data.subtitle}
+          description={project.data.description}
+          tags={project.data.tags}
+          slug={project.slug}
+          visualLabel={project.data.visualLabel}
+          variant={project.data.visualVariant}
+        />
+      ))}
+    </div>
+  </section>
+  <CallToAction
+    eyebrow="Discuss the work"
+    title="Interested in the thinking behind these projects?"
+    text="I am happy to discuss design decisions, systems, and the questions that shaped the work."
+  />
+</BaseLayout>

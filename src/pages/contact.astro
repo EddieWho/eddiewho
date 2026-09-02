@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import { isTodoValue, siteConfig } from '@/config/site';
+
+const contactItems = [
+  {
+    index: '01',
+    label: 'Email',
+    value: isTodoValue(siteConfig.email) ? 'Add email address' : siteConfig.email,
+    href: isTodoValue(siteConfig.email) ? undefined : `mailto:${siteConfig.email}`,
+  },
+  {
+    index: '02',
+    label: 'GitHub',
+    value: 'github.com/EddieWho',
+    href: siteConfig.github,
+  },
+  {
+    index: '03',
+    label: 'LinkedIn',
+    value: isTodoValue(siteConfig.linkedin) ? 'Add LinkedIn profile' : 'View profile',
+    href: isTodoValue(siteConfig.linkedin) ? undefined : siteConfig.linkedin,
+  },
+  {
+    index: '04',
+    label: 'Curriculum Vitae',
+    value: isTodoValue(siteConfig.cv) ? 'PDF coming soon' : 'Download CV',
+    href: isTodoValue(siteConfig.cv) ? undefined : siteConfig.cv,
+  },
+];
+---
+
+<BaseLayout
+  title="Contact — Yin Yuan"
+  description="Contact Yin Yuan to discuss research, data, technology, or game development."
+>
+  <PageHeading
+    index="03"
+    eyebrow="Contact"
+    title="Let’s exchange perspectives."
+    intro="I welcome thoughtful conversations about research, data, technology, interactive systems, or game development."
+  />
+  <section class="contact-section shell">
+    <div class="contact-intro">
+      <p>Whether you have a question, an idea, or simply want to compare notes, the best place to begin is a short message.</p>
+      <span>Available links</span>
+    </div>
+    <div class="contact-list">
+      {contactItems.map((item) => (
+        <div class:list={['contact-row', { 'contact-row-todo': !item.href }]}>
+          <span>{item.index}</span>
+          <p>{item.label}</p>
+          {item.href ? (
+            <a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}>
+              {item.value} <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span class="contact-todo">{item.value} · TODO</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

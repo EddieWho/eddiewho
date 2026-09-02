@@ -1,0 +1,49 @@
+---
+import Tags from './Tags.astro';
+
+interface Props {
+  number: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  tags: string[];
+  slug: string;
+  visualLabel: string;
+  variant?: 'grid' | 'cards';
+}
+
+const {
+  number,
+  title,
+  subtitle,
+  description,
+  tags,
+  slug,
+  visualLabel,
+  variant = 'grid',
+} = Astro.props;
+const base = import.meta.env.BASE_URL;
+const href = `${base}projects/${slug}/`;
+---
+
+<article class:list={['project-card', `project-card-${variant}`]}>
+  <a href={href} aria-label={`View ${title}`}>
+    <div class="project-visual" aria-hidden="true">
+      <span class="project-number">{number}</span>
+      <span class="visual-cross visual-cross-a">+</span>
+      <span class="visual-cross visual-cross-b">+</span>
+      <span class="visual-label">{visualLabel}</span>
+    </div>
+    <div class="project-content">
+      <div class="project-title-row">
+        <div>
+          <h3>{title}</h3>
+          {subtitle && <p class="project-subtitle">{subtitle}</p>}
+        </div>
+        <span class="project-arrow" aria-hidden="true">↗</span>
+      </div>
+      <p class="project-description">{description}</p>
+      <Tags tags={tags} dark />
+    </div>
+  </a>
+</article>

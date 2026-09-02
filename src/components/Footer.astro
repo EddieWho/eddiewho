@@ -1,0 +1,42 @@
+---
+import { isTodoValue, siteConfig } from '@/config/site';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+const currentYear = new Date().getFullYear();
+const links = [
+  { label: 'GitHub', href: siteConfig.github, todo: false },
+  { label: 'LinkedIn', href: siteConfig.linkedin, todo: isTodoValue(siteConfig.linkedin) },
+  { label: 'Email', href: `mailto:${siteConfig.email}`, todo: isTodoValue(siteConfig.email) },
+];
+---
+
+<footer class="site-footer">
+  <div class="shell footer-top">
+    <div>
+      <p class="footer-name">Yin Yuan</p>
+      <p class="footer-note">Research, data, and interactive systems.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <p class="footer-label">Explore</p>
+        <a href={withBase('')}>Home</a>
+        <a href={withBase('blog/')}>Blog</a>
+        <a href={withBase('projects/')}>Projects</a>
+        <a href={withBase('contact/')}>Contact</a>
+      </div>
+      <div>
+        <p class="footer-label">Elsewhere</p>
+        {links.map((link) => link.todo ? (
+          <span class="todo-link" title="Link to be added">{link.label} · TODO</span>
+        ) : (
+          <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <span>© {currentYear} Yin Yuan</span>
+    <span>Designed with care. Built with Astro.</span>
+  </div>
+</footer>
