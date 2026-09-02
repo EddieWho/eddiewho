@@ -58,6 +58,7 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
             slug={project.slug}
             visualLabel={project.data.visualLabel}
             variant={project.data.visualVariant}
+            image={project.data.cover}
           />
         ))}
       </div>

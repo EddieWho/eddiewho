@@ -25,7 +25,7 @@ const base = import.meta.env.BASE_URL;
 <BaseLayout
   title={`${data.title}${data.subtitle ? ` — ${data.subtitle}` : ''} | Yin Yuan`}
   description={data.description}
-  socialImage={false}
+  socialImage={data.cover?.src ?? false}
 >
   <article class="project-detail">
     <header class:list={['project-detail-hero', `detail-${data.visualVariant}`]}>
@@ -40,11 +40,23 @@ const base = import.meta.env.BASE_URL;
           <p class="detail-description">{data.description}</p>
         </div>
         <Tags tags={data.tags} dark />
-        <div class="detail-visual" aria-label="Visual placeholder; project imagery to be added">
-          <span>{data.visualLabel}</span>
-          <span class="detail-visual-center">+</span>
-          <span>IMAGE ARCHIVE / TODO</span>
-        </div>
+        {data.cover ? (
+          <figure class="detail-visual detail-visual-image">
+            <img
+              src={`${base}${data.cover.src}`}
+              alt={data.cover.alt}
+              width={data.cover.width}
+              height={data.cover.height}
+            />
+            {data.cover.caption && <figcaption>{data.cover.caption}</figcaption>}
+          </figure>
+        ) : (
+          <div class="detail-visual" aria-label="Visual placeholder; project imagery to be added">
+            <span>{data.visualLabel}</span>
+            <span class="detail-visual-center" aria-hidden="true">+</span>
+            <span>IMAGE ARCHIVE / TODO</span>
+          </div>
+        )}
       </div>
     </header>
 
@@ -99,7 +111,13 @@ const base = import.meta.env.BASE_URL;
           <div class="gallery-grid">
             {data.gallery.map((image) => (
               <figure>
-                <img src={image.src} alt={image.alt} loading="lazy" />
+                <img
+                  src={`${base}${image.src}`}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                />
                 {image.caption && <figcaption>{image.caption}</figcaption>}
               </figure>
             ))}

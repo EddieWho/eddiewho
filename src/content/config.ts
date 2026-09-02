@@ -10,6 +10,13 @@ const projects = defineCollection({
     tags: z.array(z.string()),
     visualLabel: z.string(),
     visualVariant: z.enum(['grid', 'cards']),
+    cover: z.object({
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+      width: z.number().optional(),
+      height: z.number().optional(),
+    }).optional(),
     coreExperience: z.array(z.string()),
     keySystems: z.array(z.object({
       title: z.string(),
@@ -21,6 +28,8 @@ const projects = defineCollection({
       src: z.string(),
       alt: z.string(),
       caption: z.string().optional(),
+      width: z.number().optional(),
+      height: z.number().optional(),
     })).default([]),
   }),
 });
