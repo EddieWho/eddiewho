@@ -3,7 +3,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeading from '@/components/PageHeading.astro';
 import { isTodoValue, siteConfig } from '@/config/site';
 
-const base = import.meta.env.BASE_URL;
 const contactItems = [
   {
     index: '01',
@@ -25,13 +24,6 @@ const contactItems = [
     value: isTodoValue(siteConfig.linkedin) ? 'Add LinkedIn profile' : 'View profile',
     href: isTodoValue(siteConfig.linkedin) ? undefined : siteConfig.linkedin,
     download: undefined,
-  },
-  {
-    index: '04',
-    label: 'Curriculum Vitae',
-    value: isTodoValue(siteConfig.cv) ? 'PDF coming soon' : 'Download CV',
-    href: isTodoValue(siteConfig.cv) ? undefined : `${base}${siteConfig.cv}`,
-    download: isTodoValue(siteConfig.cv) ? undefined : 'Yin-Yuan-CV.docx',
   },
 ];
 ---
