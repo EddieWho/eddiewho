@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeading from '@/components/PageHeading.astro';
 import { isTodoValue, siteConfig } from '@/config/site';
 
+const base = import.meta.env.BASE_URL;
 const contactItems = [
   {
     index: '01',
@@ -37,7 +38,16 @@ const contactItems = [
     eyebrow="Contact"
     title="Let’s exchange perspectives."
     intro="I welcome thoughtful conversations about supply chains, logistics, interactive media arts, technology, or game development."
-  />
+  >
+    <figure class="portrait-frame contact-portrait" slot="media">
+      <img
+        src={`${base}${siteConfig.portrait}`}
+        alt="Portrait of Yin Yuan"
+        width="1254"
+        height="1254"
+      />
+    </figure>
+  </PageHeading>
   <section class="contact-section shell">
     <div class="contact-intro">
       <p>Whether you have a question, an idea, or simply want to compare notes, the best place to begin is a short message.</p>

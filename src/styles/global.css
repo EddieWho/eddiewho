@@ -722,11 +722,23 @@ a:focus-visible {
   line-height: 0.88;
 }
 
-.page-heading-grid > p {
+.page-heading-aside > p {
   margin: 0;
   color: var(--muted);
   font-size: 16px;
   line-height: 1.75;
+}
+
+.page-heading-aside-with-media {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(48px, 6vw, 84px);
+}
+
+.contact-portrait {
+  width: min(250px, 100%);
 }
 
 .projects-index-section {
@@ -1372,6 +1384,10 @@ a:focus-visible {
 
   .page-heading-grid {
     gap: 36px;
+  }
+
+  .contact-portrait {
+    width: 180px;
   }
 
   .project-detail-hero h1 {
