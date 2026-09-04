@@ -1,6 +1,6 @@
 {
   "seo": {
-    "title": "Yin Yuan — Research, Data & Interactive Systems",
+    "title": "Welcome",
     "description": "The portfolio of Yin Yuan, exploring research, data, technology, and interactive systems."
   },
   "hero": {
@@ -12,13 +12,13 @@
     "secondaryLabel": "Read the Blog"
   },
   "work": {
-    "eyebrow": "01 / Selected work",
+    "eyebrow": "Selected work",
     "title": "Projects in focus",
     "noteLineOne": "Experiments in strategy, play,",
     "noteLineTwo": "and computational systems."
   },
   "writing": {
-    "eyebrow": "02 / Latest writing",
+    "eyebrow": "Latest writing",
     "title": "Notes & observations",
     "linkLabel": "Explore the blog",
     "emptyIndex": "No. 000",
@@ -26,8 +26,8 @@
     "emptyText": "Essays and field notes on research, data, technology, and the design of interactive systems will live here."
   },
   "about": {
-    "eyebrow": "03 / A brief introduction",
-    "portraitCaption": "Yin Yuan / Portrait",
+    "eyebrow": "A brief introduction",
+    "portraitCaption": "Portrait",
     "leadBefore": "Curious about the structures behind how people",
     "leadEmphasis": "decide, coordinate,",
     "leadAfter": "and play.",
