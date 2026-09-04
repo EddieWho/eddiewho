@@ -1,0 +1,191 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.205.3/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: EddieWho/eddiewho
+  branch: main
+  auth_methods: [token]
+
+site_url: https://eddiewho.github.io/eddiewho
+display_url: https://eddiewho.github.io/eddiewho
+
+media_folder: /public/images/uploads
+public_folder: /eddiewho/images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+  maxlength: 80
+  trim: true
+  lowercase: true
+
+output:
+  omit_empty_optional_fields: true
+
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+
+collections:
+  - name: site
+    label: 首页 / Home
+    icon: home
+    files:
+      - name: home
+        label: 首页文案 / Home page
+        file: src/content/site/home.json
+        format: json
+        fields:
+          - name: seo
+            label: 页面信息 / Page metadata
+            widget: object
+            fields:
+              - { name: title, label: 浏览器标题 / Page title, widget: string }
+              - { name: description, label: 页面描述 / Meta description, widget: text }
+          - name: hero
+            label: 首屏 / Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: 顶部小字 / Eyebrow, widget: string }
+              - { name: title, label: 主标题第一行 / Main title, widget: string }
+              - { name: emphasis, label: 主标题强调词 / Emphasized title, widget: string }
+              - { name: description, label: 简介 / Description, widget: text }
+              - { name: primaryLabel, label: 主按钮文字 / Primary button, widget: string }
+              - { name: secondaryLabel, label: 次按钮文字 / Secondary button, widget: string }
+          - name: work
+            label: 精选项目区 / Selected work
+            widget: object
+            fields:
+              - { name: eyebrow, label: 区域编号与小标题 / Eyebrow, widget: string }
+              - { name: title, label: 标题 / Heading, widget: string }
+              - { name: noteLineOne, label: 右侧说明第一行 / Note line 1, widget: string }
+              - { name: noteLineTwo, label: 右侧说明第二行 / Note line 2, widget: string }
+          - name: writing
+            label: 博客区 / Latest writing
+            widget: object
+            fields:
+              - { name: eyebrow, label: 区域编号与小标题 / Eyebrow, widget: string }
+              - { name: title, label: 标题 / Heading, widget: string }
+              - { name: linkLabel, label: 博客链接文字 / Blog link, widget: string }
+              - { name: emptyIndex, label: 无文章时编号 / Empty-state number, widget: string }
+              - { name: emptyTitle, label: 无文章时标题 / Empty-state title, widget: string }
+              - { name: emptyText, label: 无文章时说明 / Empty-state text, widget: text }
+          - name: about
+            label: 自我介绍区 / Introduction
+            widget: object
+            fields:
+              - { name: eyebrow, label: 区域编号与小标题 / Eyebrow, widget: string }
+              - { name: portraitCaption, label: 头像说明 / Portrait caption, widget: string }
+              - { name: leadBefore, label: 大字前半部分 / Lead before emphasis, widget: string }
+              - { name: leadEmphasis, label: 大字强调部分 / Lead emphasis, widget: string }
+              - { name: leadAfter, label: 大字后半部分 / Lead after emphasis, widget: string }
+              - { name: copy, label: 介绍正文 / Introduction text, widget: text }
+              - name: researchAreas
+                label: 兴趣领域 / Areas of interest
+                label_singular: 兴趣领域 / Area
+                widget: list
+                min: 1
+              - { name: linkLabel, label: 联系页链接文字 / Contact link, widget: string }
+          - name: cta
+            label: 页面底部行动区 / Call to action
+            widget: object
+            fields:
+              - { name: eyebrow, label: 小标题 / Eyebrow, widget: string }
+              - { name: title, label: 标题 / Heading, widget: string }
+              - { name: text, label: 说明 / Text, widget: text }
+              - { name: label, label: 按钮文字 / Button label, widget: string }
+
+  - name: blog
+    label: 博客 / Blog
+    label_singular: 文章 / Post
+    icon: edit_note
+    folder: src/content/blog
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{fields._slug}}"
+    aliases_field: false
+    media_folder: /public/images/blog/{{filename}}
+    public_folder: /eddiewho/images/blog/{{filename}}
+    fields:
+      - { name: title, label: 标题 / Title, widget: string }
+      - { name: description, label: 摘要 / Description, widget: text }
+      - { name: publicationDate, label: 发布日期 / Publication date, widget: datetime, type: date }
+      - name: tags
+        label: 标签 / Tags
+        label_singular: 标签 / Tag
+        widget: list
+        required: false
+      - { name: readingTime, label: 阅读时间 / Reading time, widget: string, required: false, hint: "Example: 6 min read" }
+      - { name: draft, label: 草稿 / Draft, widget: boolean, default: true }
+      - { name: body, label: 正文 / Body, widget: markdown }
+
+  - name: projects
+    label: 项目 / Projects
+    label_singular: 项目 / Project
+    icon: work
+    folder: src/content/projects
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{fields._slug}}"
+    aliases_field: false
+    media_folder: /public/images/projects/{{filename}}
+    public_folder: /eddiewho/images/projects/{{filename}}
+    fields:
+      - { name: title, label: 项目名称 / Title, widget: string }
+      - { name: subtitle, label: 副标题 / Subtitle, widget: string, required: false }
+      - { name: description, label: 项目简介 / Description, widget: text }
+      - { name: order, label: 首页排序 / Display order, widget: number, value_type: int, min: 1 }
+      - name: tags
+        label: 标签 / Tags
+        label_singular: 标签 / Tag
+        widget: list
+        min: 1
+      - { name: visualLabel, label: 图片区域标签 / Visual label, widget: string }
+      - name: visualVariant
+        label: 无封面时的视觉样式 / Placeholder style
+        widget: select
+        options:
+          - { label: Grid, value: grid }
+          - { label: Cards, value: cards }
+      - name: cover
+        label: 封面 / Cover
+        widget: object
+        required: false
+        collapsed: auto
+        fields:
+          - { name: src, label: 图片 / Image, widget: image }
+          - { name: alt, label: 替代文字 / Alt text, widget: text }
+          - { name: caption, label: 图片说明 / Caption, widget: text, required: false }
+          - { name: width, label: 原图宽度 / Width, widget: number, value_type: int, min: 1, required: false }
+          - { name: height, label: 原图高度 / Height, widget: number, value_type: int, min: 1, required: false }
+      - name: coreExperience
+        label: 核心体验 / Core experience
+        label_singular: 体验要点 / Point
+        widget: list
+        min: 1
+      - name: keySystems
+        label: 关键系统 / Key systems
+        label_singular: 系统 / System
+        widget: list
+        min: 1
+        summary: "{{fields.title}}"
+        fields:
+          - { name: title, label: 系统名称 / Title, widget: string }
+          - { name: description, label: 系统说明 / Description, widget: text }
+      - { name: development, label: 开发说明 / Development, widget: text, required: false }
+      - { name: currentProgress, label: 当前进度 / Current progress, widget: text, required: false }
+      - name: gallery
+        label: 图集 / Gallery
+        label_singular: 图片 / Image
+        widget: list
+        required: false
+        summary: "{{fields.caption}}"
+        fields:
+          - { name: src, label: 图片 / Image, widget: image }
+          - { name: alt, label: 替代文字 / Alt text, widget: text }
+          - { name: caption, label: 图片说明 / Caption, widget: text, required: false }
+          - { name: width, label: 原图宽度 / Width, widget: number, value_type: int, min: 1, required: false }
+          - { name: height, label: 原图高度 / Height, widget: number, value_type: int, min: 1, required: false }
+      - { name: body, label: 项目正文 / Project body, widget: markdown }

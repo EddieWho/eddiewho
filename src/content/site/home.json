@@ -1,0 +1,47 @@
+{
+  "seo": {
+    "title": "Yin Yuan — Research, Data & Interactive Systems",
+    "description": "The portfolio of Yin Yuan, exploring research, data, technology, and interactive systems."
+  },
+  "hero": {
+    "eyebrow": "Research · Data · Interactive Systems",
+    "title": "Ideas shaped into",
+    "emphasis": "systems.",
+    "description": "I explore how data and technology shape supply chains, organizations, and interactive experiences.",
+    "primaryLabel": "View Selected Work",
+    "secondaryLabel": "Read the Blog"
+  },
+  "work": {
+    "eyebrow": "01 / Selected work",
+    "title": "Projects in focus",
+    "noteLineOne": "Experiments in strategy, play,",
+    "noteLineTwo": "and computational systems."
+  },
+  "writing": {
+    "eyebrow": "02 / Latest writing",
+    "title": "Notes & observations",
+    "linkLabel": "Explore the blog",
+    "emptyIndex": "No. 000",
+    "emptyTitle": "Writing coming soon.",
+    "emptyText": "Essays and field notes on research, data, technology, and the design of interactive systems will live here."
+  },
+  "about": {
+    "eyebrow": "03 / A brief introduction",
+    "portraitCaption": "Yin Yuan / Portrait",
+    "leadBefore": "Curious about the structures behind how people",
+    "leadEmphasis": "decide, coordinate,",
+    "leadAfter": "and play.",
+    "copy": "My interests span supply chain and logistics, and interactive media arts. I am drawn to both the operational logic of complex systems and the expressive possibilities of interactive media.",
+    "researchAreas": [
+      "Supply Chain & Logistics",
+      "Interactive Media Arts"
+    ],
+    "linkLabel": "More about my interests"
+  },
+  "cta": {
+    "eyebrow": "Start a conversation",
+    "title": "Have a question worth exploring?",
+    "text": "I am always interested in thoughtful conversations around supply chains, logistics, interactive media arts, technology, and game development.",
+    "label": "Get in touch"
+  }
+}

@@ -46,4 +46,52 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { projects, blog };
+const site = defineCollection({
+  type: 'data',
+  schema: z.object({
+    seo: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+    hero: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      emphasis: z.string(),
+      description: z.string(),
+      primaryLabel: z.string(),
+      secondaryLabel: z.string(),
+    }),
+    work: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      noteLineOne: z.string(),
+      noteLineTwo: z.string(),
+    }),
+    writing: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      linkLabel: z.string(),
+      emptyIndex: z.string(),
+      emptyTitle: z.string(),
+      emptyText: z.string(),
+    }),
+    about: z.object({
+      eyebrow: z.string(),
+      portraitCaption: z.string(),
+      leadBefore: z.string(),
+      leadEmphasis: z.string(),
+      leadAfter: z.string(),
+      copy: z.string(),
+      researchAreas: z.array(z.string()).min(1),
+      linkLabel: z.string(),
+    }),
+    cta: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      text: z.string(),
+      label: z.string(),
+    }),
+  }),
+});
+
+export const collections = { projects, blog, site };

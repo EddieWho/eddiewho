@@ -21,11 +21,29 @@ The generated static site is written to `dist/`.
 
 ## Content
 
-- Personal links and profile copy: `src/config/site.ts`
+- Home page copy: `src/content/site/home.json`
 - Projects: `src/content/projects/`
-- Future blog posts: `src/content/blog/`
+- Blog posts: `src/content/blog/`
+- Personal links and shared profile settings: `src/config/site.ts`
 
 Blog frontmatter supports `title`, `description`, `publicationDate`, `tags`, `readingTime`, and `draft`. Draft posts are excluded from all generated pages.
+
+## Content admin
+
+The browser-based editor is available at:
+
+```text
+https://eddiewho.github.io/eddiewho/admin/
+```
+
+Choose **Sign In with Token** and use a GitHub personal access token that can read and write repository contents in `EddieWho/eddiewho`. The editor can:
+
+- update all Home page copy;
+- create, edit, and delete Blog posts with Markdown;
+- create, edit, and delete Projects;
+- upload Blog and Project images into their matching public image folders.
+
+The token is stored by the browser and must never be committed to the repository or shared. Use the editor only on a trusted device.
 
 ## GitHub Pages
 

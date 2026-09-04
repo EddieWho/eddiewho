@@ -1,5 +1,6 @@
 ---
 import Tags from './Tags.astro';
+import { resolveAssetPath } from '@/utils/asset';
 
 interface Props {
   number: string;
@@ -38,7 +39,7 @@ const href = `${base}projects/${slug}/`;
     <div class="project-visual">
       {image && (
         <img
-          src={`${base}${image.src}`}
+          src={resolveAssetPath(image.src, base)}
           alt={image.alt}
           width={image.width}
           height={image.height}
