@@ -1,6 +1,6 @@
 ---
-title: 王朝暗战
-subtitle: Dynastic Shadow War
+title: Dynastic Shadow War
+subtitle: 王朝暗战
 description: A double-sided hidden-information strategy card game supporting single-player AI and cross-platform multiplayer. Players compete through hidden factions, concealed troop movements, tactical deception, and strategic deduction.
 order: 2
 tags:
