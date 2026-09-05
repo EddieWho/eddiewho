@@ -11,7 +11,7 @@ tags:
 visualLabel: HIDDEN ORDER / OPEN CONSEQUENCE
 visualVariant: cards
 cover:
-  src: /eddiewho/images/projects/dynastic-shadow-war/01-cover.png
+  src: /eddiewho/images/projects/dynastic-shadow-war/exec-d4309235-9490-450b-8675-3bac9fa6a93a.png
   alt: Main menu of Dynastic Shadow War, split between blue and red factions with a pixel-art emperor
   caption: In a dynasty where no soldier's loyalty is certain, limited information becomes the deadliest weapon.
   width: 1920
