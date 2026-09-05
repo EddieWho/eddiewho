@@ -7,7 +7,7 @@
     "eyebrow": "Research · Data · Interactive Systems",
     "title": "Ideas shaped into",
     "emphasis": "systems.",
-    "description": "I explore how data and technology shape supply chains, organizations, and interactive experiences.",
+    "description": "Exploring how data and technology shape supply chains, organizations, and interactive experiences.",
     "primaryLabel": "View Selected Work",
     "secondaryLabel": "Read the Blog"
   },
@@ -23,7 +23,7 @@
     "linkLabel": "Explore the blog",
     "emptyIndex": "No. 000",
     "emptyTitle": "Writing coming soon.",
-    "emptyText": "Essays and field notes on research, data, technology, and the design of interactive systems will live here."
+    "emptyText": "Essays and Dev-logs on research, data, technology, and the design of interactive systems will live here."
   },
   "about": {
     "eyebrow": "A brief introduction",
@@ -31,7 +31,7 @@
     "leadBefore": "Curious about the structures behind how people",
     "leadEmphasis": "decide, coordinate,",
     "leadAfter": "and play.",
-    "copy": "My interests span supply chain and logistics, and interactive media arts. I am drawn to both the operational logic of complex systems and the expressive possibilities of interactive media.",
+    "copy": "I am currently a student majoring in supply chain and logistics. I believe my interests in interactive media arts could help shape a better understanding of what I learn. I am drawn to both the operational logic of complex systems and the expressive possibilities of interactive media.",
     "researchAreas": [
       "Supply Chain & Logistics",
       "Interactive Media Arts"
@@ -41,7 +41,7 @@
   "cta": {
     "eyebrow": "Start a conversation",
     "title": "Have a question worth exploring?",
-    "text": "I am always interested in thoughtful conversations around supply chains, logistics, interactive media arts, technology, and game development.",
+    "text": "Always ready for your thoughts!\nFeel free to contact me!",
     "label": "Get in touch"
   }
 }
