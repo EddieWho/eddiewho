@@ -10,7 +10,7 @@ tags:
 visualLabel: A chess played with creatures
 visualVariant: grid
 cover:
-  src: /eddiewho/images/projects/grid-beast/grid_beasts_cover_20260906.png
+  src: /eddiewho/images/uploads/grid_beasts_cover_20260906.png
   alt: No image yet
 coreExperience:
   - Explore a world as a single player.
