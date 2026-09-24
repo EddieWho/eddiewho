@@ -1,6 +1,7 @@
 ---
 import Footer from '@/components/Footer.astro';
 import Navigation from '@/components/Navigation.astro';
+import { siteConfig } from '@/config/site';
 import { resolveAssetPath } from '@/utils/asset';
 import '../styles/global.css';
 
@@ -29,9 +30,15 @@ const socialImageURL = socialImage
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"
+    />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Yin Yuan" />
+    <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />

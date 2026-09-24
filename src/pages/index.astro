@@ -14,13 +14,16 @@ if (!homeEntry) {
 }
 
 const home = homeEntry.data;
+const pageTitle = home.seo.title.includes(siteConfig.name)
+  ? home.seo.title
+  : `${home.seo.title} — ${siteConfig.name}`;
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publicationDate.valueOf() - a.data.publicationDate.valueOf())
   .slice(0, 3);
 ---
 
-<BaseLayout title={home.seo.title} description={home.seo.description}>
+<BaseLayout title={pageTitle} description={home.seo.description}>
   <section class="hero shell">
     <div class="hero-kicker reveal">{home.hero.eyebrow}</div>
     <div class="hero-grid">
@@ -49,7 +52,7 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
       <div class="project-list">
         {projects.map((project, index) => (
           <ProjectCard
-            number={`0${index + 1}`}
+            number={String(index + 1).padStart(2, '0')}
             title={project.data.title}
             subtitle={project.data.subtitle}
             description={project.data.description}
@@ -77,7 +80,7 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
         {publishedPosts.map((post) => (
           <article class="home-post">
             <time datetime={post.data.publicationDate.toISOString()}>
-              {post.data.publicationDate.toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })}
+              {post.data.publicationDate.toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
             </time>
             <h3><a href={`${base}blog/${post.slug}/`}>{post.data.title}</a></h3>
             <p>{post.data.description}</p>

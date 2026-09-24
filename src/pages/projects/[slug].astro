@@ -21,6 +21,24 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 const { data } = project;
 const base = import.meta.env.BASE_URL;
+
+// Notes still marked TODO in the content file stay out of the public page.
+const isPublishable = (value?: string): value is string =>
+  Boolean(value && !/^TODO\b/i.test(value.trim()));
+const development = isPublishable(data.development) ? data.development : undefined;
+const currentProgress = isPublishable(data.currentProgress) ? data.currentProgress : undefined;
+const hasGallery = data.gallery.length > 0;
+
+let sectionCount = 0;
+const nextSectionNumber = () => String(++sectionCount).padStart(2, '0');
+const sectionNumbers = {
+  overview: nextSectionNumber(),
+  experience: nextSectionNumber(),
+  systems: nextSectionNumber(),
+  development: development ? nextSectionNumber() : '',
+  progress: currentProgress ? nextSectionNumber() : '',
+  gallery: hasGallery ? nextSectionNumber() : '',
+};
 ---
 
 <BaseLayout
@@ -48,6 +66,7 @@ const base = import.meta.env.BASE_URL;
               alt={data.cover.alt}
               width={data.cover.width}
               height={data.cover.height}
+              fetchpriority="high"
             />
             {data.cover.caption && <figcaption>{data.cover.caption}</figcaption>}
           </figure>
@@ -63,12 +82,12 @@ const base = import.meta.env.BASE_URL;
 
     <div class="shell detail-content">
       <section class="detail-section overview-section">
-        <div class="detail-section-label"><span>01</span><h2>Overview</h2></div>
+        <div class="detail-section-label"><span>{sectionNumbers.overview}</span><h2>Overview</h2></div>
         <div class="prose"><Content /></div>
       </section>
 
       <section class="detail-section">
-        <div class="detail-section-label"><span>02</span><h2>Core Experience</h2></div>
+        <div class="detail-section-label"><span>{sectionNumbers.experience}</span><h2>Core Experience</h2></div>
         <ol class="experience-list">
           {data.coreExperience.map((item, index) => (
             <li><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>
@@ -77,7 +96,7 @@ const base = import.meta.env.BASE_URL;
       </section>
 
       <section class="detail-section">
-        <div class="detail-section-label"><span>03</span><h2>Key Systems</h2></div>
+        <div class="detail-section-label"><span>{sectionNumbers.systems}</span><h2>Key Systems</h2></div>
         <div class="systems-grid">
           {data.keySystems.map((system, index) => (
             <article>
@@ -89,26 +108,26 @@ const base = import.meta.env.BASE_URL;
         </div>
       </section>
 
-      {(data.development || data.currentProgress) && (
-        <section class="detail-section detail-notes-grid">
-          {data.development && (
+      {(development || currentProgress) && (
+        <section class:list={['detail-section', 'detail-notes-grid', { 'detail-notes-single': !(development && currentProgress) }]}>
+          {development && (
             <div>
-              <div class="detail-section-label compact"><span>04</span><h2>Development</h2></div>
-              <p class="neutral-placeholder">{data.development}</p>
+              <div class="detail-section-label compact"><span>{sectionNumbers.development}</span><h2>Development</h2></div>
+              <p class="neutral-placeholder">{development}</p>
             </div>
           )}
-          {data.currentProgress && (
+          {currentProgress && (
             <div>
-              <div class="detail-section-label compact"><span>05</span><h2>Current Progress</h2></div>
-              <p class="neutral-placeholder">{data.currentProgress}</p>
+              <div class="detail-section-label compact"><span>{sectionNumbers.progress}</span><h2>Current Progress</h2></div>
+              <p class="neutral-placeholder">{currentProgress}</p>
             </div>
           )}
         </section>
       )}
 
-      <section class="detail-section gallery-section">
-        <div class="detail-section-label"><span>06</span><h2>Gallery</h2></div>
-        {data.gallery.length > 0 ? (
+      {hasGallery && (
+        <section class="detail-section gallery-section">
+          <div class="detail-section-label"><span>{sectionNumbers.gallery}</span><h2>Gallery</h2></div>
           <div class="gallery-grid">
             {data.gallery.map((image) => (
               <figure>
@@ -118,18 +137,14 @@ const base = import.meta.env.BASE_URL;
                   width={image.width}
                   height={image.height}
                   loading="lazy"
+                  decoding="async"
                 />
                 {image.caption && <figcaption>{image.caption}</figcaption>}
               </figure>
             ))}
           </div>
-        ) : (
-          <div class="gallery-placeholder">
-            <span aria-hidden="true">⊕</span>
-            <p>Project imagery will be added here.</p>
-          </div>
-        )}
-      </section>
+        </section>
+      )}
     </div>
   </article>
   <CallToAction eyebrow="Continue the conversation" />

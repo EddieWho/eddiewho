@@ -22,7 +22,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     <div class="shell project-list">
       {projects.map((project, index) => (
         <ProjectCard
-          number={`0${index + 1}`}
+          number={String(index + 1).padStart(2, '0')}
           title={project.data.title}
           subtitle={project.data.subtitle}
           description={project.data.description}

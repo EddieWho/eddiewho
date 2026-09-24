@@ -21,7 +21,7 @@ const { Content } = await post.render();
     <header class="article-header">
       <a class="back-link" href={`${import.meta.env.BASE_URL}blog/`}><span aria-hidden="true">←</span> All writing</a>
       <time datetime={post.data.publicationDate.toISOString()}>
-        {post.data.publicationDate.toLocaleDateString('en', { month: 'long', day: 'numeric', year: 'numeric' })}
+        {post.data.publicationDate.toLocaleDateString('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
       </time>
       <h1>{post.data.title}</h1>
       <p>{post.data.description}</p>
