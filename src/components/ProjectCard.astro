@@ -44,6 +44,7 @@ const href = `${base}projects/${slug}/`;
           width={image.width}
           height={image.height}
           loading="lazy"
+          decoding="async"
         />
       )}
       <span class="project-number">{number}</span>
@@ -60,7 +61,7 @@ const href = `${base}projects/${slug}/`;
         <span class="project-arrow" aria-hidden="true">↗</span>
       </div>
       <p class="project-description">{description}</p>
-      <Tags tags={tags} dark />
+      <Tags tags={tags} />
     </div>
   </a>
 </article>

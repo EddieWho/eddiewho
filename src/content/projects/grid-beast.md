@@ -11,7 +11,9 @@ visualLabel: A chess played with creatures
 visualVariant: grid
 cover:
   src: /eddiewho/images/uploads/grid_beasts_cover_20260906.png
-  alt: No image yet
+  alt: Grid Beasts key art showing the game logo above a leaf creature, a water creature, and a fire dragon
+  width: 1672
+  height: 941
 coreExperience:
   - Explore a world as a single player.
   - Collect creatures and develop them through progression systems.

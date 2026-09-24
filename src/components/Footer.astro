@@ -14,8 +14,8 @@ const links = [
 <footer class="site-footer">
   <div class="shell footer-top">
     <div>
-      <p class="footer-name">Yin Yuan</p>
-      <p class="footer-note">Supply chain, logistics, and interactive media arts.</p>
+      <p class="footer-name"><span class="pixel" aria-hidden="true"></span>{siteConfig.name}</p>
+      <p class="footer-note">{siteConfig.descriptor}</p>
     </div>
     <div class="footer-links">
       <div>
@@ -36,7 +36,7 @@ const links = [
     </div>
   </div>
   <div class="shell footer-bottom">
-    <span>© {currentYear} Yin Yuan</span>
-    <span>Designed with care. Built with Astro.</span>
+    <span>© {currentYear} {siteConfig.name}</span>
+    <span>Built with Astro · Hosted on GitHub Pages</span>
   </div>
 </footer>

@@ -1,32 +1,32 @@
 {
   "seo": {
-    "title": "Welcome",
-    "description": "The portfolio of Yin Yuan, exploring research, data, technology, and interactive systems."
+    "title": "Student & Indie Developer",
+    "description": "The portfolio of Yin Yuan, a supply chain and logistics student working toward becoming an indie game developer."
   },
   "hero": {
-    "eyebrow": "Research · Data · Interactive Systems",
-    "title": "Ideas shaped into",
-    "emphasis": "systems.",
-    "description": "Exploring how data and technology shape supply chains, organizations, and interactive experiences.",
-    "primaryLabel": "View Selected Work",
-    "secondaryLabel": "Read the Blog"
+    "eyebrow": "Indie developer in the making",
+    "title": "Making games about",
+    "emphasis": "meaningful decisions.",
+    "description": "I study supply chain and logistics, and I build strategy games on the path to becoming an indie developer — games where hidden information, timing, and planning all matter.",
+    "primaryLabel": "See the games",
+    "secondaryLabel": "Read the devlog"
   },
   "work": {
     "eyebrow": "Selected work",
-    "title": "Projects in focus",
+    "title": "Games in progress",
     "noteLineOne": "Experiments in strategy, play,",
     "noteLineTwo": "and computational systems."
   },
   "writing": {
-    "eyebrow": "Latest writing",
-    "title": "Notes & observations",
-    "linkLabel": "Explore the blog",
-    "emptyIndex": "No. 000",
+    "eyebrow": "Devlog",
+    "title": "Notes from the build",
+    "linkLabel": "Open the devlog",
+    "emptyIndex": "ls devlog/",
     "emptyTitle": "Writing coming soon.",
     "emptyText": "Essays and Dev-logs on research, data, technology, and the design of interactive systems will live here."
   },
   "about": {
-    "eyebrow": "A brief introduction",
+    "eyebrow": "About me",
     "portraitCaption": "Portrait",
     "leadBefore": "Curious about the structures behind how people",
     "leadEmphasis": "decide, coordinate,",
@@ -36,7 +36,7 @@
       "Supply Chain & Logistics",
       "Interactive Media Arts"
     ],
-    "linkLabel": "More about my interests"
+    "linkLabel": "Say hello"
   },
   "cta": {
     "eyebrow": "Start a conversation",
