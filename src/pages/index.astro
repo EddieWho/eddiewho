@@ -28,7 +28,7 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="hero-kicker reveal">{home.hero.eyebrow}</div>
     <div class="hero-grid">
       <div>
-        <h1 class="reveal reveal-delay-1">{home.hero.title}<br /><em>{home.hero.emphasis}</em></h1>
+        <h1 class="reveal reveal-delay-1">{home.hero.title} <em>{home.hero.emphasis}</em></h1>
       </div>
       <div class="hero-copy reveal reveal-delay-2">
         <p>{home.hero.description}</p>
@@ -38,6 +38,13 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
         </div>
       </div>
     </div>
+    <nav aria-label="On this page">
+      <ul class="hero-index reveal reveal-delay-2">
+        <li><a href="#selected-work"><span>01</span>{home.work.eyebrow}</a></li>
+        <li><a href="#latest-writing"><span>02</span>{home.writing.eyebrow}</a></li>
+        <li><a href="#introduction"><span>03</span>{home.about.eyebrow}</a></li>
+      </ul>
+    </nav>
   </section>
 
   <section class="work-section" id="selected-work">
@@ -67,7 +74,7 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
     </div>
   </section>
 
-  <section class="writing-section shell">
+  <section class="writing-section shell" id="latest-writing">
     <div class="section-heading section-heading-light">
       <div>
         <p class="eyebrow">{home.writing.eyebrow}</p>
@@ -98,7 +105,7 @@ const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft))
     )}
   </section>
 
-  <section class="about-section">
+  <section class="about-section" id="introduction">
     <div class="shell about-grid">
       <div class="about-aside">
         <p class="eyebrow">{home.about.eyebrow}</p>
