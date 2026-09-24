@@ -15,8 +15,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <PageHeading
     index="01"
     eyebrow="Blog"
-    title="Notes for thinking in public."
-    intro="Essays, working notes, and observations on how technology shapes organizations, markets, and interactive experiences."
+    title="Devlogs & notes, written in public."
+    intro="Development logs, working notes, and observations from building games and studying the systems behind them."
   />
   <section class="blog-index shell">
     {posts.length > 0 ? (
@@ -34,11 +34,18 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       </div>
     ) : (
       <div class="blog-empty-state">
-        <div class="empty-symbol" aria-hidden="true">∴</div>
-        <div>
-          <p class="eyebrow">The first note is taking shape</p>
-          <h2>Writing coming soon.</h2>
-          <p>No articles have been published yet. This space is prepared for future essays and shorter field notes.</p>
+        <p class="eyebrow">The first note is taking shape</p>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="player-card-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>~/devlog</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="terminal-prompt" aria-hidden="true">$ </span>ls devlog/</p>
+            <h2>Writing coming soon.</h2>
+            <p class="terminal-note">No articles have been published yet. This space is prepared for devlogs, essays, and shorter field notes.</p>
+            <p><span class="terminal-prompt" aria-hidden="true">$ </span><span class="caret" aria-hidden="true"></span></p>
+          </div>
         </div>
       </div>
     )}
