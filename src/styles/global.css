@@ -1388,6 +1388,11 @@ img {
   margin: 0;
 }
 
+/* With an odd number of images, the first one leads at full width */
+.gallery-grid > figure:first-child:nth-last-child(2n + 1) {
+  grid-column: 1 / -1;
+}
+
 .gallery-grid img {
   display: block;
   width: 100%;
