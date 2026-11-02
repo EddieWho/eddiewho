@@ -1,6 +1,6 @@
 ---
 title: Grid Beasts
-subtitle: 棋盘大陆
+subtitle: 生灵棋旅
 description: A single-player strategy RPG combining open exploration, creature collection and progression, and timeline-based chess combat on a 16×12 grid.
 order: 1
 tags:
