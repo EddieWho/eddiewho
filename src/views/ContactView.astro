@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import { isTodoValue, siteConfig } from '@/config/site';
+import { useTranslations, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const base = import.meta.env.BASE_URL;
+const contactItems = [
+  {
+    index: '01',
+    label: t.contact.email,
+    value: isTodoValue(siteConfig.email) ? t.contact.addEmail : siteConfig.email,
+    href: isTodoValue(siteConfig.email) ? undefined : `mailto:${siteConfig.email}`,
+  },
+  {
+    index: '02',
+    label: 'GitHub',
+    value: 'github.com/EddieWho',
+    href: siteConfig.github,
+  },
+  {
+    index: '03',
+    label: 'LinkedIn',
+    value: isTodoValue(siteConfig.linkedin) ? t.contact.addLinkedin : t.contact.linkedinValue,
+    href: isTodoValue(siteConfig.linkedin) ? undefined : siteConfig.linkedin,
+  },
+];
+---
+
+<BaseLayout title={`${t.contact.title} — ${siteConfig.name}`} description={t.contact.description}>
+  <PageHeading
+    index="03"
+    eyebrow={t.contact.eyebrow}
+    title={t.contact.heading}
+    intro={t.contact.intro}
+  >
+    <figure class="portrait-frame contact-portrait" slot="media">
+      <img
+        src={`${base}${siteConfig.portrait}`}
+        alt={t.portraitAlt(siteConfig.name)}
+        width="1254"
+        height="1254"
+      />
+    </figure>
+  </PageHeading>
+  <section class="contact-section shell">
+    <div class="contact-intro">
+      <p>{t.contact.body}</p>
+      <span>{t.contact.linksLabel}</span>
+    </div>
+    <div class="contact-list">
+      {contactItems.map((item) => (
+        <div class:list={['contact-row', { 'contact-row-todo': !item.href }]}>
+          <span>{item.index}</span>
+          <p>{item.label}</p>
+          {item.href ? (
+            <a
+              href={item.href}
+              target={item.href.startsWith('http') ? '_blank' : undefined}
+              rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+            >
+              {item.value} <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span class="contact-todo">{item.value} · TODO</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

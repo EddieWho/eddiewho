@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Tags from '@/components/Tags.astro';
+import { siteConfig } from '@/config/site';
+import { formatDate, localeMeta, localePath, useTranslations, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+  post: CollectionEntry<'blog'>;
+}
+
+const { locale, post } = Astro.props;
+const t = useTranslations(locale);
+const { Content } = await post.render();
+// Posts are written in one language and shown in both versions of the site.
+const postLang = post.data.language !== locale ? localeMeta[post.data.language].htmlLang : undefined;
+---
+
+<BaseLayout title={`${post.data.title} | ${siteConfig.name}`} description={post.data.description} socialImage={false}>
+  <article class="article-page shell">
+    <header class="article-header">
+      <a class="back-link" href={localePath('blog/', locale)}><span aria-hidden="true">←</span> {t.blog.backLink}</a>
+      <time datetime={post.data.publicationDate.toISOString()}>{formatDate(post.data.publicationDate, locale, 'long')}</time>
+      <h1 lang={postLang}>{post.data.title}</h1>
+      <p lang={postLang}>{post.data.description}</p>
+      <div lang={postLang}><Tags tags={post.data.tags} /></div>
+    </header>
+    <div class="prose article-prose" lang={postLang}><Content /></div>
+  </article>
+</BaseLayout>

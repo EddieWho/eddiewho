@@ -1,4 +1,6 @@
 ---
+import { formatDate, getLocaleFromPath, localeMeta, localePath } from '@/i18n';
+
 interface Props {
   title: string;
   description: string;
@@ -6,20 +8,23 @@ interface Props {
   tags: string[];
   readingTime?: string;
   slug: string;
+  /** Language the post is written in. */
+  language?: 'en' | 'zh';
 }
 
-const { title, description, date, tags, readingTime, slug } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const { title, description, date, tags, readingTime, slug, language } = Astro.props;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const postLang = language && language !== locale ? localeMeta[language].htmlLang : undefined;
 ---
 
 <article class="blog-card">
-  <a href={`${base}blog/${slug}/`}>
+  <a href={localePath(`blog/${slug}/`, locale)}>
     <div class="blog-card-meta">
-      <time datetime={date.toISOString()}>{date.toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time>
+      <time datetime={date.toISOString()}>{formatDate(date, locale)}</time>
       {readingTime && <span>{readingTime}</span>}
     </div>
-    <h2>{title}</h2>
-    <p>{description}</p>
+    <h2 lang={postLang}>{title}</h2>
+    <p lang={postLang}>{description}</p>
     <div class="blog-card-tags">{tags.join(' · ')}</div>
   </a>
 </article>

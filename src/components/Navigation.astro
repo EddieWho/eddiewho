@@ -1,31 +1,39 @@
 ---
-import { siteConfig } from '@/config/site';
+import { siteConfig, siteProfile } from '@/config/site';
+import { localeMeta, localePath, locales, switchLocalePath, useTranslations, type Locale } from '@/i18n';
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+interface Props {
+  locale: Locale;
+  /** Hide the language switch on pages that exist in only one language. */
+  translated?: boolean;
+}
+
+const { locale, translated = true } = Astro.props;
+const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
+const home = localePath('', locale);
 
 const navItems = [
-  { label: 'Home', href: '' },
-  { label: 'Blog', href: 'blog/' },
-  { label: 'Projects', href: 'projects/' },
-  { label: 'Contact', href: 'contact/' },
+  { label: t.nav.home, href: '' },
+  { label: t.nav.blog, href: 'blog/' },
+  { label: t.nav.projects, href: 'projects/' },
+  { label: t.nav.contact, href: 'contact/' },
 ];
 ---
 
 <header class="site-header">
   <div class="shell nav-shell">
-    <a class="site-identity" href={withBase('')} aria-label={`${siteConfig.name}, home`}>
+    <a class="site-identity" href={home} aria-label={t.nav.homeAria(siteConfig.name)}>
       <span class="identity-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <span>{siteConfig.name}</span>
-      <span class="identity-role" aria-hidden="true">{siteConfig.role}</span>
+      <span class="identity-role" aria-hidden="true">{siteProfile[locale].role}</span>
     </a>
-    <nav aria-label="Primary navigation">
+    <nav aria-label={t.nav.label}>
       <ul class="nav-list">
         {navItems.map((item) => {
-          const href = withBase(item.href);
+          const href = localePath(item.href, locale);
           const isActive = item.href === ''
-            ? currentPath === base || currentPath === base.replace(/\/$/, '')
+            ? currentPath === home || currentPath === home.replace(/\/$/, '')
             : currentPath.startsWith(href);
           return (
             <li>
@@ -35,5 +43,24 @@ const navItems = [
         })}
       </ul>
     </nav>
+    {translated && (
+      <div class="lang-switch" role="group" aria-label={`${t.langSwitch.group} / ${useTranslations(locale === 'en' ? 'zh' : 'en').langSwitch.group}`}>
+        {locales.map((item) => item === locale ? (
+          <span class="lang-current" lang={localeMeta[item].htmlLang} aria-current="true">
+            {localeMeta[item].switchLabel}
+          </span>
+        ) : (
+          <a
+            href={switchLocalePath(currentPath, item)}
+            hreflang={localeMeta[item].htmlLang}
+            lang={localeMeta[item].htmlLang}
+            aria-label={useTranslations(item).langSwitch.to}
+            title={localeMeta[item].name}
+          >
+            {localeMeta[item].switchLabel}
+          </a>
+        ))}
+      </div>
+    )}
   </div>
 </header>
