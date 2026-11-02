@@ -1,12 +1,15 @@
 ---
+import { getLocaleFromPath, useTranslations } from '@/i18n';
+
 interface Props {
   tags: string[];
   dark?: boolean;
 }
 
 const { tags, dark = false } = Astro.props;
+const t = useTranslations(getLocaleFromPath(Astro.url.pathname));
 ---
 
-<ul class:list={['tag-list', { 'tag-list-dark': dark }]} aria-label="Tags">
+<ul class:list={['tag-list', { 'tag-list-dark': dark }]} aria-label={t.tagsLabel}>
   {tags.map((tag) => <li>{tag}</li>)}
 </ul>

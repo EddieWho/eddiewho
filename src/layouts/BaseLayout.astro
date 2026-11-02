@@ -2,6 +2,7 @@
 import Footer from '@/components/Footer.astro';
 import Navigation from '@/components/Navigation.astro';
 import { siteConfig } from '@/config/site';
+import { getLocaleFromPath, localeMeta, locales, switchLocalePath, useTranslations } from '@/i18n';
 import { resolveAssetPath } from '@/utils/asset';
 import '../styles/global.css';
 
@@ -9,9 +10,19 @@ interface Props {
   title: string;
   description: string;
   socialImage?: string | false;
+  /** False for pages that exist in only one language, such as the 404 page. */
+  translated?: boolean;
 }
 
-const { title, description, socialImage = 'og.png' } = Astro.props;
+const { title, description, socialImage = 'og.png', translated = true } = Astro.props;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+const alternates = translated
+  ? locales.map((item) => ({
+      hreflang: localeMeta[item].htmlLang,
+      href: new URL(switchLocalePath(Astro.url.pathname, item), Astro.site),
+    }))
+  : [];
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,7 +32,7 @@ const socialImageURL = socialImage
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={localeMeta[locale].htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -29,6 +40,8 @@ const socialImageURL = socialImage
     <meta name="theme-color" content="#f5f0e6" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
+    {alternates.map((alternate) => <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />)}
+    {translated && <link rel="alternate" hreflang="x-default" href={new URL(switchLocalePath(Astro.url.pathname, 'en'), Astro.site)} />}
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,8 +49,15 @@ const socialImageURL = socialImage
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     />
+    {locale === 'zh' && (
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      />
+    )}
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={localeMeta[locale].ogLocale} />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -50,11 +70,11 @@ const socialImageURL = socialImage
     <title>{title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <Navigation />
+    <a class="skip-link" href="#main-content">{t.skipLink}</a>
+    <Navigation locale={locale} translated={translated} />
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
   </body>
 </html>

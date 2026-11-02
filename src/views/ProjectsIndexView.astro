@@ -1,0 +1,49 @@
+---
+import CallToAction from '@/components/CallToAction.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config/site';
+import { useTranslations, type Locale } from '@/i18n';
+import { getProjects } from '@/i18n/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const projects = await getProjects(locale);
+---
+
+<BaseLayout title={`${t.projects.title} — ${siteConfig.name}`} description={t.projects.description}>
+  <PageHeading
+    index="02"
+    eyebrow={t.projects.eyebrow}
+    title={t.projects.heading}
+    intro={t.projects.intro}
+  />
+  <section class="projects-index-section">
+    <div class="shell project-list">
+      {projects.map(({ slug, entry, translated }, index) => (
+        <ProjectCard
+          number={String(index + 1).padStart(2, '0')}
+          title={entry.data.title}
+          subtitle={entry.data.subtitle}
+          description={entry.data.description}
+          tags={entry.data.tags}
+          slug={slug}
+          visualLabel={entry.data.visualLabel}
+          variant={entry.data.visualVariant}
+          image={entry.data.cover}
+          contentLang={translated ? undefined : 'en'}
+        />
+      ))}
+    </div>
+  </section>
+  <CallToAction
+    eyebrow={t.projects.ctaEyebrow}
+    title={t.projects.ctaTitle}
+    text={t.projects.ctaText}
+  />
+</BaseLayout>

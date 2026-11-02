@@ -1,38 +1,39 @@
 import { defineCollection, z } from 'astro:content';
 
-const projects = defineCollection({
-  type: 'content',
-  schema: z.object({
+const projectSchema = z.object({
+  title: z.string(),
+  subtitle: z.string().optional(),
+  description: z.string(),
+  order: z.number(),
+  tags: z.array(z.string()),
+  visualLabel: z.string(),
+  visualVariant: z.enum(['grid', 'cards']),
+  cover: z.object({
+    src: z.string(),
+    alt: z.string(),
+    caption: z.string().optional(),
+    width: z.number().optional(),
+    height: z.number().optional(),
+  }).optional(),
+  coreExperience: z.array(z.string()),
+  keySystems: z.array(z.object({
     title: z.string(),
-    subtitle: z.string().optional(),
     description: z.string(),
-    order: z.number(),
-    tags: z.array(z.string()),
-    visualLabel: z.string(),
-    visualVariant: z.enum(['grid', 'cards']),
-    cover: z.object({
-      src: z.string(),
-      alt: z.string(),
-      caption: z.string().optional(),
-      width: z.number().optional(),
-      height: z.number().optional(),
-    }).optional(),
-    coreExperience: z.array(z.string()),
-    keySystems: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-    })),
-    development: z.string().optional(),
-    currentProgress: z.string().optional(),
-    gallery: z.array(z.object({
-      src: z.string(),
-      alt: z.string(),
-      caption: z.string().optional(),
-      width: z.number().optional(),
-      height: z.number().optional(),
-    })).default([]),
-  }),
+  })),
+  development: z.string().optional(),
+  currentProgress: z.string().optional(),
+  gallery: z.array(z.object({
+    src: z.string(),
+    alt: z.string(),
+    caption: z.string().optional(),
+    width: z.number().optional(),
+    height: z.number().optional(),
+  })).default([]),
 });
+
+// English is the default; projects-zh holds Chinese translations with matching file names.
+const projects = defineCollection({ type: 'content', schema: projectSchema });
+const projectsZh = defineCollection({ type: 'content', schema: projectSchema });
 
 const blog = defineCollection({
   type: 'content',
@@ -43,6 +44,8 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     readingTime: z.string().optional(),
     draft: z.boolean().default(false),
+    // Language the post is written in; posts appear in both site languages.
+    language: z.enum(['en', 'zh']).default('en'),
   }),
 });
 
@@ -94,4 +97,4 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { projects, blog, site };
+export const collections = { projects, 'projects-zh': projectsZh, blog, site };

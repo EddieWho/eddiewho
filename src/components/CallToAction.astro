@@ -1,4 +1,6 @@
 ---
+import { getLocaleFromPath, localePath, useTranslations } from '@/i18n';
+
 interface Props {
   eyebrow?: string;
   title?: string;
@@ -7,13 +9,13 @@ interface Props {
   href?: string;
 }
 
-const base = import.meta.env.BASE_URL;
-const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
 const {
-  eyebrow = 'Start a conversation',
-  title = 'Have a question worth exploring?',
-  text = 'I am always interested in thoughtful conversations around supply chains, logistics, interactive media arts, technology, and game development.',
-  label = 'Get in touch',
+  eyebrow = t.cta.eyebrow,
+  title = t.cta.title,
+  text = t.cta.text,
+  label = t.cta.label,
   href = 'contact/',
 } = Astro.props;
 ---
@@ -24,7 +26,7 @@ const {
     <div>
       <h2>{title}</h2>
       <p>{text}</p>
-      <a class="button button-light" href={withBase(href)}>{label} <span aria-hidden="true">↗</span></a>
+      <a class="button button-light" href={localePath(href, locale)}>{label} <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 </section>

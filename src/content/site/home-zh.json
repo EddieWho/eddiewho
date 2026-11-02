@@ -1,0 +1,47 @@
+{
+  "seo": {
+    "title": "学生 & 独立开发者",
+    "description": "Yin Yuan 的作品集——一名供应链与物流专业的学生，正在成为独立游戏开发者的路上。"
+  },
+  "hero": {
+    "eyebrow": "成长中的独立开发者",
+    "title": "我做的游戏，关乎",
+    "emphasis": "有意义的抉择。",
+    "description": "我主修供应链与物流，同时在成为独立开发者的路上制作策略游戏——在这些游戏里，隐藏信息、时机与规划都至关重要。",
+    "primaryLabel": "看看游戏",
+    "secondaryLabel": "阅读开发日志"
+  },
+  "work": {
+    "eyebrow": "精选作品",
+    "title": "开发中的游戏",
+    "noteLineOne": "关于策略、游戏性",
+    "noteLineTwo": "与计算系统的实验。"
+  },
+  "writing": {
+    "eyebrow": "开发日志",
+    "title": "来自开发现场的笔记",
+    "linkLabel": "打开开发日志",
+    "emptyIndex": "ls devlog/",
+    "emptyTitle": "文章即将上线。",
+    "emptyText": "关于研究、数据、技术与交互系统设计的随笔和开发日志，将在这里发布。"
+  },
+  "about": {
+    "eyebrow": "关于我",
+    "portraitCaption": "头像",
+    "leadBefore": "我好奇人们如何",
+    "leadEmphasis": "决策、协作",
+    "leadAfter": "与游戏，以及这背后的结构。",
+    "copy": "我目前是一名主修供应链与物流的学生。我相信，我对交互媒体艺术的兴趣能帮助我更好地理解所学的内容。复杂系统的运作逻辑与交互媒体的表达可能，都同样吸引着我。",
+    "researchAreas": [
+      "供应链与物流",
+      "交互媒体艺术"
+    ],
+    "linkLabel": "打个招呼"
+  },
+  "cta": {
+    "eyebrow": "开启对话",
+    "title": "有值得探讨的问题吗？",
+    "text": "随时欢迎你的想法！\n欢迎与我联系！",
+    "label": "联系我"
+  }
+}

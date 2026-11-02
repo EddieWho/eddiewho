@@ -36,7 +36,7 @@ collections:
         label: 首页文案 / Home page
         file: src/content/site/home.json
         format: json
-        fields:
+        fields: &home_fields
           - name: seo
             label: 页面信息 / Page metadata
             widget: object
@@ -95,6 +95,11 @@ collections:
               - { name: title, label: 标题 / Heading, widget: string }
               - { name: text, label: 说明 / Text, widget: text }
               - { name: label, label: 按钮文字 / Button label, widget: string }
+      - name: home-zh
+        label: 首页文案（中文） / Home page (Chinese)
+        file: src/content/site/home-zh.json
+        format: json
+        fields: *home_fields
 
   - name: blog
     label: 博客 / Blog
@@ -118,6 +123,14 @@ collections:
         required: false
       - { name: readingTime, label: 阅读时间 / Reading time, widget: string, required: false, hint: "Example: 6 min read" }
       - { name: draft, label: 草稿 / Draft, widget: boolean, default: true }
+      - name: language
+        label: 文章语言 / Post language
+        widget: select
+        default: en
+        hint: 文章会同时出现在中英文两个版本的网站中 / Posts appear in both versions of the site
+        options:
+          - { label: English, value: en }
+          - { label: 中文, value: zh }
       - { name: body, label: 正文 / Body, widget: markdown }
 
   - name: projects
@@ -131,7 +144,7 @@ collections:
     aliases_field: false
     media_folder: /public/images/projects/{{filename}}
     public_folder: /eddiewho/images/projects/{{filename}}
-    fields:
+    fields: &project_fields
       - { name: title, label: 项目名称 / Title, widget: string }
       - { name: subtitle, label: 副标题 / Subtitle, widget: string, required: false }
       - { name: description, label: 项目简介 / Description, widget: text }
@@ -188,3 +201,17 @@ collections:
           - { name: width, label: 原图宽度 / Width, widget: number, value_type: int, min: 1, required: false }
           - { name: height, label: 原图高度 / Height, widget: number, value_type: int, min: 1, required: false }
       - { name: body, label: 项目正文 / Project body, widget: markdown }
+
+  - name: projects-zh
+    label: 项目（中文） / Projects (Chinese)
+    label_singular: 项目（中文） / Project (Chinese)
+    icon: translate
+    description: 中文版项目页面。文件名需与英文项目一致（例如 grid-beast）；缺少中文版时会显示英文内容。 / Chinese project pages. Use the same file name as the English project; missing translations fall back to English.
+    folder: src/content/projects-zh
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{fields._slug}}"
+    aliases_field: false
+    media_folder: /public/images/projects/{{filename}}
+    public_folder: /eddiewho/images/projects/{{filename}}
+    fields: *project_fields

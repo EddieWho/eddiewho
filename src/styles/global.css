@@ -14,8 +14,9 @@
   --mustard-soft: #f8e2a6;
   --on-dark: #f1ece1;
   --on-dark-muted: #b3ab9c;
-  --sans: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --cjk: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans SC';
+  --sans: 'Bricolage Grotesque', var(--cjk), 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, var(--cjk), monospace;
   --shell: min(1240px, calc(100vw - 64px));
   --header: 68px;
   --shadow: 5px 5px 0 var(--ink);
@@ -190,6 +191,10 @@ img {
   letter-spacing: 0.02em;
 }
 
+.site-header nav {
+  margin-left: auto;
+}
+
 .nav-list {
   display: flex;
   align-items: center;
@@ -218,6 +223,44 @@ img {
   border-color: var(--ink);
   color: var(--paper);
   background: var(--ink);
+}
+
+/* Language switch */
+
+.lang-switch {
+  display: flex;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lang-switch > * {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+}
+
+.lang-switch > * + * {
+  border-left: 1.5px solid var(--ink);
+}
+
+.lang-current {
+  color: var(--ink);
+  background: var(--mustard);
+}
+
+.lang-switch a {
+  color: var(--muted);
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.lang-switch a:hover {
+  color: var(--ink);
+  background: var(--mustard-soft);
 }
 
 /* ---------- Buttons & links ---------- */
@@ -1550,6 +1593,25 @@ img {
   grid-column: 2;
 }
 
+.translation-notice {
+  max-width: 640px;
+  margin: -40px 0 40px;
+  padding: 10px 14px;
+  border: 1.5px dashed var(--mustard);
+  color: var(--on-dark);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+  margin-top: 36px;
+}
+
 .not-found {
   min-height: 70svh;
   padding-block: 120px;
@@ -1625,6 +1687,15 @@ img {
     grid-template-columns: 130px 1fr;
   }
 
+  .home-post {
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 10px 24px;
+  }
+
+  .home-post p {
+    grid-column: 2;
+  }
+
   .blog-card > a > p,
   .blog-card-tags {
     grid-column: 2;
@@ -1642,7 +1713,7 @@ img {
 @media (max-width: 600px) {
   :root {
     --shell: calc(100% - 32px);
-    --header: 60px;
+    --header: 100px;
   }
 
   .site-identity {
@@ -1651,16 +1722,29 @@ img {
   }
 
   .nav-shell {
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    padding-block: 10px 6px;
+  }
+
+  .lang-switch {
+    margin-left: auto;
+  }
+
+  .site-header nav {
+    order: 3;
+    flex-basis: 100%;
+    margin-left: 0;
   }
 
   .nav-list {
+    justify-content: space-between;
     gap: 2px;
     font-size: 12px;
   }
 
   .nav-list a {
-    padding: 6px 7px;
+    padding: 6px 8px;
   }
 
   .hero {
@@ -1779,6 +1863,14 @@ img {
     gap: 14px;
   }
 
+  .home-post {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-post p {
+    grid-column: 1;
+  }
+
   .blog-card > a > p,
   .blog-card-tags {
     grid-column: 1;
@@ -1800,6 +1892,34 @@ img {
   .terminal-body {
     padding: 22px 18px 26px;
   }
+}
+
+/* ---------- Chinese typography ---------- */
+
+/* The display type's tight tracking and leading crowd CJK characters. */
+:is(h1, h2, h3, .about-statement, .player-name, .footer-name, .prose, .hero-lede):lang(zh) {
+  letter-spacing: 0;
+}
+
+:is(
+  .hero h1,
+  .page-heading h1,
+  .project-detail-hero h1,
+  .section-heading h2,
+  .cta-grid h2,
+  .about-statement,
+  .article-header h1,
+  .not-found h1
+):lang(zh) {
+  line-height: 1.18;
+}
+
+:is(.eyebrow, .hero-kicker, .footer-label):lang(zh) {
+  letter-spacing: 0.12em;
+}
+
+.prose:lang(zh) {
+  line-height: 1.7;
 }
 
 @media (prefers-reduced-motion: reduce) {

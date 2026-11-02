@@ -1,0 +1,150 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Tags from '@/components/Tags.astro';
+import CallToAction from '@/components/CallToAction.astro';
+import { siteConfig } from '@/config/site';
+import { localePath, useTranslations, type Locale } from '@/i18n';
+import type { LocalizedProject } from '@/i18n/content';
+import { resolveAssetPath } from '@/utils/asset';
+
+interface Props {
+  locale: Locale;
+  project: LocalizedProject;
+}
+
+const { locale, project } = Astro.props;
+const t = useTranslations(locale);
+const { Content } = await project.entry.render();
+const { data } = project.entry;
+const base = import.meta.env.BASE_URL;
+// When a translation is missing the English entry is shown, marked as English.
+const contentLang = project.translated ? undefined : 'en';
+
+// Notes still marked TODO in the content file stay out of the public page.
+const isPublishable = (value?: string): value is string =>
+  Boolean(value && !/^TODO\b/i.test(value.trim()));
+const development = isPublishable(data.development) ? data.development : undefined;
+const currentProgress = isPublishable(data.currentProgress) ? data.currentProgress : undefined;
+const hasGallery = data.gallery.length > 0;
+
+let sectionCount = 0;
+const nextSectionNumber = () => String(++sectionCount).padStart(2, '0');
+const sectionNumbers = {
+  overview: nextSectionNumber(),
+  experience: nextSectionNumber(),
+  systems: nextSectionNumber(),
+  development: development ? nextSectionNumber() : '',
+  progress: currentProgress ? nextSectionNumber() : '',
+  gallery: hasGallery ? nextSectionNumber() : '',
+};
+---
+
+<BaseLayout
+  title={`${data.title}${data.subtitle ? ` — ${data.subtitle}` : ''} | ${siteConfig.name}`}
+  description={data.description}
+  socialImage={data.cover?.src ?? false}
+>
+  <article class="project-detail">
+    <header class:list={['project-detail-hero', `detail-${data.visualVariant}`]}>
+      <div class="shell">
+        <a class="back-link" href={localePath('projects/', locale)}><span aria-hidden="true">←</span> {t.project.backLink}</a>
+        {!project.translated && <p class="translation-notice">{t.project.untranslated}</p>}
+        <div class="detail-title-grid" lang={contentLang}>
+          <div>
+            <p class="eyebrow">{t.project.eyebrow} / {String(data.order).padStart(2, '0')}</p>
+            <h1>{data.title}</h1>
+            {data.subtitle && <p class="detail-subtitle">{data.subtitle}</p>}
+          </div>
+          <p class="detail-description">{data.description}</p>
+        </div>
+        <div lang={contentLang}><Tags tags={data.tags} dark /></div>
+        {data.cover ? (
+          <figure class="detail-visual detail-visual-image" lang={contentLang}>
+            <img
+              src={resolveAssetPath(data.cover.src, base)}
+              alt={data.cover.alt}
+              width={data.cover.width}
+              height={data.cover.height}
+              fetchpriority="high"
+            />
+            {data.cover.caption && <figcaption>{data.cover.caption}</figcaption>}
+          </figure>
+        ) : (
+          <div class="detail-visual" aria-label={t.project.placeholderAria}>
+            <span lang={contentLang}>{data.visualLabel}</span>
+            <span class="detail-visual-center" aria-hidden="true">+</span>
+            <span>{t.project.placeholderArchive}</span>
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="shell detail-content">
+      <section class="detail-section overview-section">
+        <div class="detail-section-label"><span>{sectionNumbers.overview}</span><h2>{t.project.overview}</h2></div>
+        <div class="prose" lang={contentLang}><Content /></div>
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-section-label"><span>{sectionNumbers.experience}</span><h2>{t.project.coreExperience}</h2></div>
+        <ol class="experience-list" lang={contentLang}>
+          {data.coreExperience.map((item, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-section-label"><span>{sectionNumbers.systems}</span><h2>{t.project.keySystems}</h2></div>
+        <div class="systems-grid" lang={contentLang}>
+          {data.keySystems.map((system, index) => (
+            <article>
+              <span>{String.fromCharCode(65 + index)}</span>
+              <h3>{system.title}</h3>
+              <p>{system.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {(development || currentProgress) && (
+        <section class:list={['detail-section', 'detail-notes-grid', { 'detail-notes-single': !(development && currentProgress) }]}>
+          {development && (
+            <div>
+              <div class="detail-section-label compact"><span>{sectionNumbers.development}</span><h2>{t.project.development}</h2></div>
+              <p class="neutral-placeholder" lang={contentLang}>{development}</p>
+            </div>
+          )}
+          {currentProgress && (
+            <div>
+              <div class="detail-section-label compact"><span>{sectionNumbers.progress}</span><h2>{t.project.currentProgress}</h2></div>
+              <p class="neutral-placeholder" lang={contentLang}>{currentProgress}</p>
+            </div>
+          )}
+        </section>
+      )}
+
+      {hasGallery && (
+        <section class="detail-section gallery-section">
+          <div class="detail-section-label"><span>{sectionNumbers.gallery}</span><h2>{t.project.gallery}</h2></div>
+          <div class="gallery-grid" lang={contentLang}>
+            {data.gallery.map((image) => (
+              <figure>
+                <img
+                  src={resolveAssetPath(image.src, base)}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                {image.caption && <figcaption>{image.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+  <CallToAction eyebrow={t.project.ctaEyebrow} />
+</BaseLayout>

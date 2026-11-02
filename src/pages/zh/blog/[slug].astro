@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BlogPostView from '@/views/BlogPostView.astro';
+import { getPosts } from '@/i18n/content';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+---
+
+<BlogPostView locale="zh" post={post} />

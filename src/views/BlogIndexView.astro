@@ -1,0 +1,58 @@
+---
+import BlogCard from '@/components/BlogCard.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config/site';
+import { useTranslations, type Locale } from '@/i18n';
+import { getPosts } from '@/i18n/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const posts = await getPosts();
+---
+
+<BaseLayout title={`${t.blog.title} — ${siteConfig.name}`} description={t.blog.description}>
+  <PageHeading
+    index="01"
+    eyebrow={t.blog.eyebrow}
+    title={t.blog.heading}
+    intro={t.blog.intro}
+  />
+  <section class="blog-index shell">
+    {posts.length > 0 ? (
+      <div class="blog-list">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.publicationDate}
+            tags={post.data.tags}
+            readingTime={post.data.readingTime}
+            slug={post.slug}
+            language={post.data.language}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="blog-empty-state">
+        <p class="eyebrow">{t.blog.emptyEyebrow}</p>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="player-card-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>~/devlog</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="terminal-prompt" aria-hidden="true">$ </span>ls devlog/</p>
+            <h2>{t.blog.emptyTitle}</h2>
+            <p class="terminal-note">{t.blog.emptyText}</p>
+            <p><span class="terminal-prompt" aria-hidden="true">$ </span><span class="caret" aria-hidden="true"></span></p>
+          </div>
+        </div>
+      </div>
+    )}
+  </section>
+</BaseLayout>
