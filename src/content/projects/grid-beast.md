@@ -32,6 +32,32 @@ keySystems:
     description: Each save keeps its own warehouse and bestiary, alongside five difficulty levels, a Daily Challenge, creature titles and nicknames, and Steam friend battles.
 development: A solo project in development since August 2026, built in Unity 6 with C#, UI Toolkit, the Input System, Unity Localization, and Steamworks.NET. A custom in-editor workbench is used to author creatures, traits, and evolution chains, while automated EditMode and PlayMode tests, including screenshot-capture tests, back up visual reviews. Python tools in the repository generate a content overview report and run balance simulations.
 currentProgress: The full expedition loop now runs through three acts to the final boss (internal version v0.9925), with Windows and macOS builds and a separate demo edition covering act 1. Recent updates added the Promotion system, creature titles and nicknames, warehouse search, text and layout support for eight languages, Steam friend matches, leaderboards, and achievements, an illustrated battlefield for each act, a board-game style interface redesign, five difficulty levels, a Daily Challenge, and new run items called gadgets. Still in progress are Promotion battle animations and balancing, a proposed second set of expedition events, and a full two-device network test of friend battles.
+gallery:
+  - src: /eddiewho/images/projects/grid-beasts/01-route-map.webp
+    alt: Act 1 route map with battle, elite, event, campfire, and recruit nodes linked by dotted paths, a pawn marking the current position, and a party panel listing four creatures with their HP and experience
+    caption: Plan each climb on the act's branching route map, with your party's health and experience alongside.
+    width: 1920
+    height: 1080
+  - src: /eddiewho/images/projects/grid-beasts/02-riverside-battle.webp
+    alt: Grid battlefield beside a riverside village, with a white bird creature's reachable cells highlighted in blue, enemy creatures across the board, and a turn-order timeline along the top
+    caption: Battles play out on an illustrated battlefield, with a speed-based timeline showing who acts next.
+    width: 1920
+    height: 1080
+  - src: /eddiewho/images/projects/grid-beasts/03-night-village-battle.webp
+    alt: Night-time village battlefield with a church, graves, and lanterns, a creature's cross-shaped attack range highlighted in blue, and a burning tile near the enemy creatures
+    caption: Every creature attacks in its own shape — here, a cross-shaped range in a haunted village.
+    width: 1920
+    height: 1080
+  - src: /eddiewho/images/projects/grid-beasts/04-island-battle.webp
+    alt: Sandy island battlefield surrounded by sea, with a cross-shaped attack range highlighted, lightning-marked tiles, and opposing creatures to the right
+    caption: Each act brings a new battlefield, and tile effects change how the board plays.
+    width: 1920
+    height: 1080
+  - src: /eddiewho/images/projects/grid-beasts/05-evolution.webp
+    alt: Evolution screen showing Gosling becoming Seraphplume, with HP, Attack, Speed, Move, and Range increases and its Agile+ trait upgrading to Agile++
+    caption: Experience leads to evolution — Gosling becomes Seraphplume, with higher stats and an upgraded trait.
+    width: 1920
+    height: 1080
 ---
 
 Grid Beasts is a creature-collection roguelite about planning under pressure. Each expedition is a climb through branching route maps, where you decide which fights, events, and recruits are worth the risk to the small team you brought along.
