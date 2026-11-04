@@ -14,7 +14,7 @@ interface Props {
   translated?: boolean;
 }
 
-const { title, description, socialImage = 'og.png', translated = true } = Astro.props;
+const { title, description, socialImage = 'og.jpg', translated = true } = Astro.props;
 const locale = getLocaleFromPath(Astro.url.pathname);
 const t = useTranslations(locale);
 const alternates = translated
