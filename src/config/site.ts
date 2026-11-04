@@ -2,7 +2,7 @@ import type { Locale } from '@/i18n';
 
 export const siteConfig = {
   name: 'Yin Yuan',
-  portrait: 'images/yin-yuan-portrait.png',
+  portrait: 'images/yin-yuan-portrait.webp',
   email: 'eddyyin0424@gmail.com',
   github: 'https://github.com/EddieWho',
   linkedin: 'https://www.linkedin.com/in/yinyuan/',

@@ -11,7 +11,7 @@ tags:
 visualLabel: 一场与生灵共下的棋
 visualVariant: grid
 cover:
-  src: /eddiewho/images/uploads/grid_beasts_cover_20260906.png
+  src: /eddiewho/images/uploads/grid_beasts_cover_20260906.jpg
   alt: 《生灵棋旅》主视觉：游戏标志下方是一只叶子生物、一只水系生物和一条火龙
   width: 1672
   height: 941

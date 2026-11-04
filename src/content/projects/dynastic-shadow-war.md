@@ -11,11 +11,11 @@ tags:
 visualLabel: HIDDEN ORDER / OPEN CONSEQUENCE
 visualVariant: cards
 cover:
-  src: /eddiewho/images/projects/dynastic-shadow-war/exec-d4309235-9490-450b-8675-3bac9fa6a93a.png
+  src: /eddiewho/images/projects/dynastic-shadow-war/cover.jpg
   alt: Main menu of Dynastic Shadow War, split between blue and red factions with a pixel-art emperor
   caption: In a dynasty where no soldier's loyalty is certain, limited information becomes the deadliest weapon.
-  width: 1920
-  height: 1080
+  width: 1672
+  height: 941
 coreExperience:
   - Read only the opposing army's color totals, then decide whether to secretly reshape your formation before battle.
   - Reveal loyalists and spies simultaneously, turning every hidden allegiance into a shift in battlefield power.
@@ -33,22 +33,22 @@ keySystems:
 development: TODO — Development notes will be added when production details are ready to share.
 currentProgress: The current portfolio materials document the main menu, hidden army setup, simultaneous reveal, rules reference, and round-result states. A fuller public development update will be added later.
 gallery:
-  - src: /eddiewho/images/projects/dynastic-shadow-war/02-army-reveal.png
+  - src: /eddiewho/images/projects/dynastic-shadow-war/02-army-reveal.webp
     alt: Army display showing only the opposing force's blue and red color totals while unit identities remain hidden
     caption: Players see only the enemy army's color totals, then decide whether to secretly reshape their formation before battle.
     width: 1920
     height: 1080
-  - src: /eddiewho/images/projects/dynastic-shadow-war/03-battle-clash.png
+  - src: /eddiewho/images/projects/dynastic-shadow-war/03-battle-clash.webp
     alt: Battle screen revealing loyalists and spies from both armies as their combat power is calculated
     caption: At battle, loyalists and spies are revealed together as unit values, allegiance, and the King's power determine the outcome.
     width: 1920
     height: 1080
-  - src: /eddiewho/images/projects/dynastic-shadow-war/04-rules.png
+  - src: /eddiewho/images/projects/dynastic-shadow-war/04-rules.webp
     alt: Rules panel explaining unit power, the King, tie-breaks, and post-battle cleansing
     caption: A single rules panel explains unit power, the King mechanic, tie-breaks, and post-battle cleansing.
     width: 1920
     height: 1080
-  - src: /eddiewho/images/projects/dynastic-shadow-war/05-battle-result.png
+  - src: /eddiewho/images/projects/dynastic-shadow-war/05-battle-result.webp
     alt: Round result panel showing the winning side, score, battlefield cleansing, and match progress
     caption: Each round ends with a clear summary of the winner, deciding factor, battlefield cleanse, and best-of-three progress.
     width: 1920
